@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { nanoid } from 'nanoid';
 import { ContactForm } from './ContactForm/ContactForm';
 import { ContactList } from './ContactList/ContactList';
@@ -13,7 +13,7 @@ export const App = () => {
 
   const dispatch = useDispatch();
   const filterContacts = useSelector(state => state.contacts);
-  
+
   const deleteContact = name => {
     dispatch(removeContact(name.currentTarget.name));
   };

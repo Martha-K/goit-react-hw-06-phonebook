@@ -3,7 +3,6 @@ import { nanoid } from 'nanoid';
 import { ContactForm } from './ContactForm/ContactForm';
 import { ContactList } from './ContactList/ContactList';
 import { Filter } from './Filter/Filter';
-
 import { useDispatch, useSelector } from 'react-redux';
 import { removeContact } from '../redux/contactsSlise';
 
@@ -12,10 +11,9 @@ export const App = () => {
   const [filter, setFilter] = useState('');
 
   const dispatch = useDispatch();
-  const filterContacts = useSelector(state => state.contacts);
-
-  const deleteContact = name => {
-    dispatch(removeContact(name.currentTarget.name));
+  const filterContacts = useSelector(state => state.contacts.items);
+  const deleteContact = el => {
+    dispatch(removeContact(el.currentTarget.id));
   };
 
   const formSubmitHandle = ({ name, number }) => {
@@ -45,6 +43,8 @@ export const App = () => {
   const changeFilter = e => {
     setFilter(e.target.value);
   };
+
+  
 
   return (
     <div>

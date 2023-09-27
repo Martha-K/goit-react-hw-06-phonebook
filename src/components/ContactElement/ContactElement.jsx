@@ -5,7 +5,7 @@ export const ContactElement = ({ el, id, onClick }) => {
   return (
     <Line key={id}>
       {el.name}: {el.number}
-      <Btn name={el.name} onClick={onClick}>
+      <Btn name={el.name} onClick={onClick} id={el.id}>
         Delete
       </Btn>
     </Line>

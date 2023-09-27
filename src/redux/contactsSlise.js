@@ -1,14 +1,17 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+
 export const contactsSlice = createSlice({
   name: 'contacts',
-  initialState: [],
+  initialState: {
+    items: []
+  },
   reducers: {
     addContact(state, action) {
-      return [...state, action.payload];
+      state.items.push(action.payload);
     },
     removeContact(state, action) {
-      return state.filter(el => el.name !== action.payload);
+      state.items = state.items.filter(el => el.id !== action.payload);
     },
   },
 });

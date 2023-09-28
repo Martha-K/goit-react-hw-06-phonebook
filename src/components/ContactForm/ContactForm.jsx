@@ -1,24 +1,30 @@
-import PropTypes from 'prop-types';
 import {nanoid} from 'nanoid'
 import { Form, Label, Button } from './styles';
-
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addContact } from '../../redux/contactsSlise';
 
 
 export const ContactForm = () => {
   const dispatch = useDispatch();
+  const filterContacts = useSelector(state => state.contacts.items);
 
   const handleSubmit = e => {
-
     e.preventDefault();
-    dispatch(
-      addContact({
-       name: e.currentTarget.elements.name.value,
-        number: e.currentTarget.elements.number.value,
-        id: nanoid()
-      })
-    );
+    
+    for (const el of filterContacts) {
+      
+      if (el.name === e.currentTarget.elements.name.value) {
+        e.currentTarget.reset();
+        return alert(`${el.name} is already in contacts.`);
+      }
+    }
+      dispatch(
+        addContact({
+          name: e.currentTarget.elements.name.value,
+          number: e.currentTarget.elements.number.value,
+          id: nanoid(),
+        })
+      );
     e.currentTarget.reset();
   };
 
@@ -47,8 +53,4 @@ export const ContactForm = () => {
       <Button type="submit">Add contact</Button>
     </Form>
   );
-};
-
-ContactForm.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
 };
